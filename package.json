@@ -1,11 +1,11 @@
 {
-  "name": "project-basewin",
+  "name": "vibecheck-app",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "frog dev",
-    "build": "frog build",
-    "start": "frog start"
+    "build": "frog vercel-build",
+    "start": "node .frog/index.js"
   },
   "dependencies": {
     "@coinbase/onchainkit": "^1.1.2",
@@ -13,10 +13,16 @@
     "@openzeppelin/contracts": "^5.4.0",
     "frog": "^0.18.3",
     "hono": "^4.11.1",
-    "viem": "^2.43.1"
+    "viem": "^2.43.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zod": "latest"
   },
   "devDependencies": {
+    "typescript": "^5.0.0",
     "tsx": "latest",
-    "typescript": "^5.0.0"
+    "@types/node": "latest",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1"
   }
 }

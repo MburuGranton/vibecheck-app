@@ -4,6 +4,8 @@ import { abi } from './abi.js'
 import { createPublicClient, http, parseUnits } from 'viem'
 import { base } from 'viem/chains'
 import '../public/styles.css' // Import the new stylesheet
+import '../public/animations.css' // Import the animations stylesheet
+import { useState } from 'react';
 
 // 1. App Configuration & Constants
 const VIBE_CHECK_SPLITTER_ADDRESS = '0x83E6416AF7600EE626DAb6D636207D6B76326c2C'
@@ -112,11 +114,52 @@ export const POST = handle(app)
 
 // Example usage of the glassmorphism container
 const App = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+    document.body.style.background = isDarkMode
+      ? 'linear-gradient(135deg, #4A90E2, #50E3C2)'
+      : '#1e1e1e';
+    document.body.style.color = isDarkMode ? '#333' : '#fff';
+  };
+
   return (
-    <div className="glass">
-      <h1>Welcome to VibeCheck</h1>
-      <p>Experience the future of social commerce with style!</p>
-      <button>Get Started</button>
+    <div className={`glass slide-in ${isDarkMode ? 'dark-mode' : ''}`}>
+      <header className="fade-in">
+        <h1>Welcome to VibeCheck</h1>
+        <nav>
+          <ul style={{ display: 'flex', justifyContent: 'space-around', listStyle: 'none', padding: 0 }}>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <section id="features" className="fade-in">
+          <h2>Features</h2>
+          <p>Discover the cutting-edge features of VibeCheck.</p>
+        </section>
+
+        <section id="about" className="fade-in">
+          <h2>About Us</h2>
+          <p>Learn more about our mission and vision.</p>
+        </section>
+
+        <section id="contact" className="fade-in">
+          <h2>Contact</h2>
+          <p>Get in touch with us for more information.</p>
+        </section>
+      </main>
+
+      <footer className="fade-in" style={{ textAlign: 'center', marginTop: '20px' }}>
+        <button onClick={toggleTheme} style={{ marginBottom: '10px' }}>
+          Toggle {isDarkMode ? 'Light' : 'Dark'} Mode
+        </button>
+        <p>&copy; 2025 VibeCheck. All rights reserved.</p>
+      </footer>
     </div>
   );
 };

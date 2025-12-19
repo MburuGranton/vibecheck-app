@@ -1,8 +1,13 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": ".frog",
-  "framework": null,
+  "functions": {
+    "api/index.tsx": {
+      "runtime": "@vercel/node"
+    }
+  },
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api" }
+    {
+      "source": "/(.*)",
+      "destination": "/api/index.tsx"
+    }
   ]
 }

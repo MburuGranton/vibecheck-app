@@ -1,0 +1,22 @@
+{
+  "name": "project-basewin",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "frog dev",
+    "build": "frog build",
+    "start": "frog start"
+  },
+  "dependencies": {
+    "@coinbase/onchainkit": "^1.1.2",
+    "@hono/node-server": "latest",
+    "@openzeppelin/contracts": "^5.4.0",
+    "frog": "^0.18.3",
+    "hono": "^4.11.1",
+    "viem": "^2.43.1"
+  },
+  "devDependencies": {
+    "tsx": "latest",
+    "typescript": "^5.0.0"
+  }
+}

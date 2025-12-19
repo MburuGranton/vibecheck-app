@@ -3,6 +3,7 @@ import { handle } from 'frog/vercel'
 import { abi } from './abi.js'
 import { createPublicClient, http, parseUnits } from 'viem'
 import { base } from 'viem/chains'
+import '../public/styles.css' // Import the new stylesheet
 
 // 1. App Configuration & Constants
 const VIBE_CHECK_SPLITTER_ADDRESS = '0x83E6416AF7600EE626DAb6D636207D6B76326c2C'
@@ -30,14 +31,12 @@ app.use(getFarcasterUserData())
 app.frame('/', (c) => {
   return c.res({
     image: (
-      <div style={{ color: 'white', display: 'flex', fontSize: 60, background: 'black', width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+      <div className="glass" style={{ color: 'white', display: 'flex', fontSize: 60, background: 'black', width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
         <h1 style={{ fontSize: 80, marginBottom: 20 }}>VibeCheck 🕶️</h1>
         <p style={{ fontSize: 30 }}>Discover & Curate the Best on Base</p>
+        <Button action="/vibe/0x0000000000000000000000000000000000000000">Explore Products</Button>
       </div>
     ),
-    intents: [
-      <Button action="/vibe/0x0000000000000000000000000000000000000000">Explore Products</Button>,
-    ]
   })
 })
 
@@ -54,12 +53,10 @@ app.frame('/vibe/:influencerAddress', (c) => {
           Curated by: {shortAddr}
         </div>
         <p style={{ fontSize: 35 }}>Price: 0.01 ETH</p>
+        <Button.Transaction target={`/tx/buy?ref=${influencer}`}>Buy with 1-Tap</Button.Transaction>
+        <Button action="/leaderboard">Leaderboard</Button>
       </div>
     ),
-    intents: [
-      <Button.Transaction target={`/tx/buy?ref=${influencer}`}>Buy with 1-Tap</Button.Transaction>,
-      <Button action="/leaderboard">Leaderboard</Button>,
-    ]
   })
 })
 
@@ -112,3 +109,16 @@ app.frame('/leaderboard', (c) => {
 // 4. Vercel Serverless Handlers
 export const GET = handle(app)
 export const POST = handle(app)
+
+// Example usage of the glassmorphism container
+const App = () => {
+  return (
+    <div className="glass">
+      <h1>Welcome to VibeCheck</h1>
+      <p>Experience the future of social commerce with style!</p>
+      <button>Get Started</button>
+    </div>
+  );
+};
+
+export default App;

@@ -1,0 +1,64 @@
+/* Base styles for the application */
+
+/* Root theme variables */
+:root {
+  --primary-color: #4A90E2; /* Eye-catching blue */
+  --secondary-color: #FFFFFF; /* White for contrast */
+  --background-color: rgba(255, 255, 255, 0.2); /* Glassmorphism background */
+  --text-color: #333333; /* Dark gray for readability */
+  --font-family: 'Poppins', sans-serif; /* Modern and clean font */
+  --border-radius: 15px; /* Smooth rounded corners */
+  --box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Glassmorphism shadow */
+}
+
+/* Apply the font globally */
+body {
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #4A90E2, #50E3C2);
+  color: var(--text-color);
+}
+
+/* Glassmorphism container */
+.glass {
+  background: var(--background-color);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+  margin: 20px;
+}
+
+/* Buttons */
+button {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #357ABD; /* Darker blue on hover */
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family);
+  color: var(--primary-color);
+}
+
+/* Links */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

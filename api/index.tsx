@@ -4,8 +4,8 @@ import { createPublicClient, http } from 'viem'
 import { base } from 'viem/chains'
 
 // Placeholder addresses - replace with actual deployed contract and merchant addresses
-const VIBE_CHECK_SPLITTER_ADDRESS = '0x0000000000000000000000000000000000000000' // Deploy VibeSplitter.sol and update
-const MERCHANT_ADDRESS = '0x0000000000000000000000000000000000000000' // Update with actual merchant address
+const VIBE_CHECK_SPLITTER_ADDRESS = '0x83E6416AF7600EE626DAb6D636207D6B76326c2C' // Deploy VibeSplitter.sol and update
+const MERCHANT_ADDRESS = '0x9484170BB453162e8B2a20d86259fAb2c8E185A8' // Update with actual merchant address
 const PRODUCT_ID = 1
 const PRODUCT_PRICE_WEI = '10000000000000000' // 0.01 ETH in wei
 const DOMAIN = 'https://vibecheck.xyz' // Update with your actual domain

@@ -193,5 +193,7 @@ app.frame('/leaderboard', (c) => {
   })
 })
 
-// Export app for frog vercel-build
-export default app
+// Vercel Serverless Function Handler
+import { handle } from 'hono/vercel'
+export const GET = handle(app)
+export const POST = handle(app)

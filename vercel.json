@@ -1,8 +1,14 @@
 {
   "version": 2,
-  "buildCommand": "vite build && frog vercel-build",
+  "framework": "vite",
+  "buildCommand": "vite build",
   "outputDirectory": "dist",
+  "functions": {
+    "api/index.tsx": {
+      "runtime": "@vercel/node@3.0.0"
+    }
+  },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api" }
+    { "source": "/api/(.*)", "destination": "/api/index.tsx" }
   ]
 }

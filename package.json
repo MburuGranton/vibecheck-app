@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "vite",
     "dev:api": "frog dev",
-    "build": "frog vercel-build",
+    "build": "vite build && frog vercel-build",
     "start": "node .frog/index.js"
   },
   "dependencies": {

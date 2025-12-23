@@ -1,14 +1,15 @@
 {
   "accountAssociation": {
-    "header": "placeholder",
-    "payload": "placeholder",
-    "signature": "placeholder"
+    "header": "eyJmaWQiOjEyMzQ1LCJ0eXBlIjoiY3VzdG9keSIsImtleSI6IjB4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCJ9",
+    "payload": "eyJkb21haW4iOiJ2aWJlY2hlY2stYXBwLWJldGEudmVyY2VsLmFwcCJ9",
+    "signature": "placeholder_signature"
   },
   "frame": {
     "version": "1",
     "name": "VibeCheck",
-    "homeUrl": "https://vibecheck.vercel.app",
-    "splashImageUrl": "https://vibecheck.xyz/splash.png",
-    "splashBackgroundColor": "#000000"
+    "homeUrl": "https://vibecheck-app-beta.vercel.app/api",
+    "iconUrl": "https://vibecheck-app-beta.vercel.app/icon.png",
+    "splashImageUrl": "https://vibecheck-app-beta.vercel.app/splash.png",
+    "splashBackgroundColor": "#0a0a0f"
   }
 }

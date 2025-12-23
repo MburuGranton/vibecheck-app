@@ -6,7 +6,8 @@
     "node": "20.x"
   },
   "scripts": {
-    "dev": "frog dev",
+    "dev": "vite",
+    "dev:api": "frog dev",
     "build": "frog vercel-build",
     "start": "node .frog/index.js"
   },
@@ -16,16 +17,18 @@
     "@openzeppelin/contracts": "^5.4.0",
     "frog": "^0.18.3",
     "hono": "^4.11.1",
-    "viem": "^2.43.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "viem": "^2.43.1",
     "zod": "latest"
   },
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "tsx": "latest",
     "@types/node": "latest",
     "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0"
+    "@types/react-dom": "^19.0.0",
+    "@vercel/node": "^5.5.16",
+    "@vitejs/plugin-react": "^5.1.2",
+    "tsx": "latest",
+    "typescript": "^5.0.0"
   }
 }

@@ -7,7 +7,7 @@ const CONTRACT_ADDRESS = '0x83E6416AF7600EE626DAb6D636207D6B76326c2C';
 const BASESCAN_URL = 'https://basescan.org';
 
 // ================== Types ==================
-type View = 'home' | 'vibe' | 'success' | 'leaderboard' | 'profile' | 'activity' | 'featured' | 'trending' | 'new' | 'transactions';
+type View = 'home' | 'vibe' | 'success' | 'leaderboard' | 'profile' | 'transactions';
 
 interface Product {
   id: number;
@@ -48,24 +48,12 @@ interface LeaderboardEntry {
   avatar: string;
   sales: number;
   earnings: string;
-  badge?: string;
-}
-
-interface Activity {
-  id: number;
-  type: 'purchase' | 'referral' | 'reward';
-  title: string;
-  description: string;
-  amount: string;
-  timestamp: string;
-  icon: string;
 }
 
 interface UserStats {
   totalEarnings: string;
   totalSales: number;
   rank: number;
-  auraScore: number;
   nftsOwned: number;
   referrals: number;
 }
@@ -75,170 +63,170 @@ const PRODUCTS: Product[] = [
   // Featured Products
   {
     id: 1,
-    title: 'Genesis Vibe Collection',
-    description: 'Exclusive digital collectible from the Genesis collection. Own a piece of the vibe and earn 7% on every referral.',
-    priceEth: '0.01',
+    title: 'Genesis Collection #001',
+    description: 'First edition from the Genesis series. Holders receive 7% of secondary sales.',
+    priceEth: '0.008',
     influencer: '0x1234567890abcdef1234567890abcdef12345678',
-    image: '✨',
+    image: 'https://picsum.photos/seed/gen001/400/400',
     badge: 'Featured',
-    category: 'Collectibles',
-    sales: 247,
-    earnings: '1.73',
+    category: 'Art',
+    sales: 47,
+    earnings: '0.26',
     isFeatured: true,
     isTrending: true,
   },
   {
     id: 2,
-    title: 'Cosmic Aura Pass',
-    description: 'Unlock exclusive access to premium drops and early minting privileges. Limited to 1000 holders.',
-    priceEth: '0.025',
+    title: 'Early Access Pass',
+    description: 'Get notified 24h before public mints. Works for all drops in 2026.',
+    priceEth: '0.02',
     influencer: '0xabcdef1234567890abcdef1234567890abcdef12',
-    image: '🌌',
-    badge: 'Limited',
-    category: 'Access Pass',
-    sales: 89,
-    earnings: '0.62',
+    image: 'https://picsum.photos/seed/pass02/400/400',
+    badge: '23 left',
+    category: 'Pass',
+    sales: 77,
+    earnings: '1.08',
     isFeatured: true,
   },
   {
     id: 3,
-    title: 'Neon Dreams Badge',
-    description: 'Show off your status with this animated profile badge. Verified holder benefits included.',
-    priceEth: '0.005',
+    title: 'Verified Badge',
+    description: 'Profile badge that shows on Warpcast. Non-transferable.',
+    priceEth: '0.003',
     influencer: '0x9876543210fedcba9876543210fedcba98765432',
-    image: '🎭',
-    badge: 'Hot',
-    category: 'Badges',
-    sales: 512,
-    earnings: '0.18',
+    image: 'https://picsum.photos/seed/badge03/400/400',
+    badge: 'Popular',
+    category: 'Badge',
+    sales: 218,
+    earnings: '0.46',
     isTrending: true,
     trendingRank: 1,
   },
   {
     id: 4,
-    title: 'Base Builder Kit',
-    description: 'Everything you need to start building on Base. Includes tutorials, templates, and community access.',
-    priceEth: '0.015',
+    title: 'Dev Starter Pack',
+    description: 'Boilerplate code + 3 months Discord access to builder community.',
+    priceEth: '0.012',
     influencer: '0xfedcba9876543210fedcba9876543210fedcba98',
-    image: '🛠️',
+    image: 'https://picsum.photos/seed/dev04/400/400',
     badge: 'New',
     category: 'Tools',
-    sales: 156,
-    earnings: '0.33',
+    sales: 12,
+    earnings: '0.10',
     isNew: true,
     launchDate: '2025-12-20',
   },
   // Trending Products
   {
     id: 5,
-    title: 'Vibe Lords NFT',
-    description: 'Join the elite Vibe Lords community. Exclusive perks, airdrops, and governance rights.',
-    priceEth: '0.05',
+    title: 'Membership Card',
+    description: 'Private Discord + weekly alpha calls. Cancel anytime.',
+    priceEth: '0.035',
     influencer: '0x1111222233334444555566667777888899990000',
-    image: '👑',
+    image: 'https://picsum.photos/seed/member05/400/400',
     badge: 'Trending',
     category: 'Membership',
-    sales: 892,
-    earnings: '3.12',
+    sales: 89,
+    earnings: '2.18',
     isTrending: true,
     trendingRank: 2,
   },
   {
     id: 6,
-    title: 'Pixel Punks Remix',
-    description: 'A fresh take on the classic pixel art style. Each piece is uniquely generated.',
-    priceEth: '0.008',
+    title: 'Abstract #847',
+    description: 'Generative art, 1/1. From the Abstract Objects collection.',
+    priceEth: '0.042',
     influencer: '0xaaaa1111bbbb2222cccc3333dddd4444eeee5555',
-    image: '🎨',
-    badge: 'Hot',
+    image: 'https://picsum.photos/seed/art06/400/400',
+    badge: '1/1',
     category: 'Art',
-    sales: 1247,
-    earnings: '0.70',
+    sales: 1,
+    earnings: '0.003',
     isTrending: true,
     trendingRank: 3,
   },
   {
     id: 7,
-    title: 'DeFi Mastery Course',
-    description: 'Learn DeFi from scratch. 20+ hours of content from top traders and developers.',
-    priceEth: '0.02',
+    title: 'Trading Basics Course',
+    description: '12 video lessons + PDF workbook. Beginner friendly.',
+    priceEth: '0.015',
     influencer: '0x5555666677778888999900001111222233334444',
-    image: '📚',
-    badge: 'Trending',
+    image: 'https://picsum.photos/seed/course07/400/400',
+    badge: '4.8 ★',
     category: 'Education',
-    sales: 445,
-    earnings: '0.62',
+    sales: 31,
+    earnings: '0.33',
     isTrending: true,
     trendingRank: 4,
   },
   // New Products
   {
     id: 8,
-    title: 'Metaverse Land Deed',
-    description: 'Own virtual real estate in the VibeVerse. Build, rent, or flip your property.',
-    priceEth: '0.1',
+    title: 'Plot #2847',
+    description: '10x10 parcel in District 4. Near main plaza.',
+    priceEth: '0.085',
     influencer: '0xbbbbccccddddeeee1111222233334444555566667',
-    image: '🏠',
+    image: 'https://picsum.photos/seed/land08/400/400',
     badge: 'New',
-    category: 'Virtual Land',
-    sales: 23,
-    earnings: '0.16',
+    category: 'Land',
+    sales: 0,
+    earnings: '0',
     isNew: true,
     launchDate: '2025-12-22',
   },
   {
     id: 9,
-    title: 'AI Art Generator Pass',
-    description: 'Unlimited access to our AI art generation tools. Create unique NFTs instantly.',
-    priceEth: '0.03',
+    title: 'Image Gen Credits',
+    description: '500 credits for AI image generation. No expiry.',
+    priceEth: '0.018',
     influencer: '0xccccddddeeee11112222333344445555666677778',
-    image: '🤖',
-    badge: 'Just Launched',
-    category: 'Tools',
-    sales: 67,
-    earnings: '0.14',
+    image: 'https://picsum.photos/seed/credits09/400/400',
+    badge: 'New',
+    category: 'Credits',
+    sales: 8,
+    earnings: '0.01',
     isNew: true,
     launchDate: '2025-12-21',
   },
   {
     id: 10,
-    title: 'Sound Wave Collection',
-    description: 'Music NFTs from emerging artists. Own the sound, share the royalties.',
-    priceEth: '0.012',
+    title: 'Beat Pack Vol. 3',
+    description: '15 royalty-free loops. WAV + stems included.',
+    priceEth: '0.009',
     influencer: '0xddddeeee111122223333444455556666777788889',
-    image: '🎵',
+    image: 'https://picsum.photos/seed/beats10/400/400',
     badge: 'New',
-    category: 'Music',
-    sales: 189,
-    earnings: '0.16',
+    category: 'Audio',
+    sales: 5,
+    earnings: '0.003',
     isNew: true,
     launchDate: '2025-12-19',
   },
   {
     id: 11,
-    title: 'Gaming Guild Token',
-    description: 'Access exclusive gaming tournaments and earn rewards. Powered by Base.',
-    priceEth: '0.007',
+    title: 'Tournament Entry',
+    description: 'Jan 15 tournament. Top 3 split 2 ETH prize pool.',
+    priceEth: '0.005',
     influencer: '0xeeee11112222333344445555666677778888999900',
-    image: '🎮',
-    badge: 'Fresh',
+    image: 'https://picsum.photos/seed/gaming11/400/400',
+    badge: '11 spots',
     category: 'Gaming',
-    sales: 334,
-    earnings: '0.16',
+    sales: 9,
+    earnings: '0.003',
     isNew: true,
     launchDate: '2025-12-18',
   },
   {
     id: 12,
-    title: 'Crypto Coffee Club',
-    description: 'NFT membership for coffee lovers. Real-world perks at partner cafes worldwide.',
-    priceEth: '0.018',
+    title: 'Coffee Subscription',
+    description: 'Monthly beans delivery + 20% off at partner cafes.',
+    priceEth: '0.022',
     influencer: '0x11112222333344445555666677778888999900001',
-    image: '☕',
+    image: 'https://picsum.photos/seed/coffee12/400/400',
     badge: 'Featured',
-    category: 'Lifestyle',
-    sales: 567,
-    earnings: '0.71',
+    category: 'Subscription',
+    sales: 34,
+    earnings: '0.52',
     isFeatured: true,
     isTrending: true,
     trendingRank: 5,
@@ -313,31 +301,22 @@ const TRANSACTIONS: Transaction[] = [
 ];
 
 const LEADERBOARD: LeaderboardEntry[] = [
-  { rank: 1, address: '0x1234...5678', username: 'vibemaster.eth', avatar: '👑', sales: 1247, earnings: '12.47', badge: 'Top Curator' },
-  { rank: 2, address: '0xabcd...ef12', username: 'crypto_sage', avatar: '🔮', sales: 892, earnings: '8.92' },
-  { rank: 3, address: '0x9876...4321', username: 'base_builder', avatar: '⚡', sales: 654, earnings: '6.54' },
-  { rank: 4, address: '0xfedc...ba98', username: 'nft_queen', avatar: '💎', sales: 521, earnings: '5.21' },
-  { rank: 5, address: '0x5678...1234', username: 'degen_dave', avatar: '🚀', sales: 423, earnings: '4.23' },
-  { rank: 6, address: '0x2468...1357', username: 'web3_wizard', avatar: '🧙', sales: 389, earnings: '3.89' },
-  { rank: 7, address: '0x1357...2468', username: 'alpha_hunter', avatar: '🎯', sales: 312, earnings: '3.12' },
-  { rank: 8, address: '0x8642...9753', username: 'mint_master', avatar: '🎨', sales: 287, earnings: '2.87' },
-];
-
-const ACTIVITIES: Activity[] = [
-  { id: 1, type: 'purchase', title: 'Purchased Genesis Vibe', description: 'You bought a collectible', amount: '-0.01 ETH', timestamp: '2 min ago', icon: '🛒' },
-  { id: 2, type: 'referral', title: 'Referral Earned', description: 'crypto_sage used your link', amount: '+0.0007 ETH', timestamp: '15 min ago', icon: '🔗' },
-  { id: 3, type: 'reward', title: 'Aura Bonus', description: 'Weekly top 10 reward', amount: '+50 Aura', timestamp: '1 hour ago', icon: '✨' },
-  { id: 4, type: 'referral', title: 'Referral Earned', description: 'base_builder used your link', amount: '+0.0007 ETH', timestamp: '3 hours ago', icon: '🔗' },
-  { id: 5, type: 'purchase', title: 'Purchased Cosmic Pass', description: 'You bought an access pass', amount: '-0.025 ETH', timestamp: '1 day ago', icon: '🛒' },
+  { rank: 1, address: '0x1234...5678', username: 'tommy.eth', avatar: 'T', sales: 342, earnings: '4.18', badge: 'Top Curator' },
+  { rank: 2, address: '0xabcd...ef12', username: 'sarah_k', avatar: 'S', sales: 289, earnings: '3.41' },
+  { rank: 3, address: '0x9876...4321', username: 'mark.base', avatar: 'M', sales: 201, earnings: '2.87' },
+  { rank: 4, address: '0xfedc...ba98', username: 'jules', avatar: 'J', sales: 167, earnings: '1.92' },
+  { rank: 5, address: '0x5678...1234', username: 'anon4829', avatar: '?', sales: 134, earnings: '1.54' },
+  { rank: 6, address: '0x2468...1357', username: 'chris.eth', avatar: 'C', sales: 98, earnings: '1.12' },
+  { rank: 7, address: '0x1357...2468', username: '0xmike', avatar: 'M', sales: 71, earnings: '0.83' },
+  { rank: 8, address: '0x8642...9753', username: 'elena_r', avatar: 'E', sales: 45, earnings: '0.52' },
 ];
 
 const USER_STATS: UserStats = {
-  totalEarnings: '2.847',
-  totalSales: 127,
-  rank: 12,
-  auraScore: 2450,
-  nftsOwned: 8,
-  referrals: 34,
+  totalEarnings: '0.847',
+  totalSales: 23,
+  rank: 847,
+  nftsOwned: 4,
+  referrals: 7,
 };
 
 // ================== Helper Functions ==================
@@ -358,11 +337,6 @@ const formatDate = (dateStr: string) => {
   if (diffDays < 7) return `${diffDays}d ago`;
   return date.toLocaleDateString();
 };
-
-// Filter helpers
-const getFeaturedProducts = () => PRODUCTS.filter(p => p.isFeatured);
-const getTrendingProducts = () => PRODUCTS.filter(p => p.isTrending).sort((a, b) => (a.trendingRank || 99) - (b.trendingRank || 99));
-const getNewProducts = () => PRODUCTS.filter(p => p.isNew).sort((a, b) => new Date(b.launchDate || '').getTime() - new Date(a.launchDate || '').getTime());
 
 // ================== Icons (Inline SVG Components) ==================
 const Icons = {
@@ -537,7 +511,6 @@ const App: React.FC = () => {
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const [buying, setBuying] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product>(PRODUCTS[0]);
-  const [activeTab, setActiveTab] = useState<'featured' | 'trending' | 'new'>('featured');
   const [copied, setCopied] = useState(false);
   const [txFilter, setTxFilter] = useState<'all' | 'buy' | 'referral' | 'mint'>('all');
   const [lastTxHash, setLastTxHash] = useState<string | null>(null);
@@ -625,10 +598,10 @@ const App: React.FC = () => {
         </button>
       ) : (
         <div className="header-brand">
-          <div className="header-logo glow-pulse">🕶️</div>
+          <div className="header-logo">V</div>
           <div>
             <h1 className="header-title">VibeCheck</h1>
-            <p className="header-subtitle">Curated drops on Base</p>
+            <p className="header-subtitle">Base marketplace</p>
           </div>
         </div>
       )}
@@ -668,18 +641,11 @@ const App: React.FC = () => {
         <span>Home</span>
       </button>
       <button 
-        className={`bottom-nav-item ${view === 'leaderboard' ? 'active' : ''}`} 
-        onClick={() => navigateTo('leaderboard')}
+        className={`bottom-nav-item ${view === 'transactions' ? 'active' : ''}`} 
+        onClick={() => navigateTo('transactions')}
       >
-        <Icons.Trophy />
-        <span>Ranks</span>
-      </button>
-      <button 
-        className={`bottom-nav-item ${view === 'activity' ? 'active' : ''}`} 
-        onClick={() => navigateTo('activity')}
-      >
-        <Icons.Activity />
-        <span>Activity</span>
+        <Icons.FileText />
+        <span>History</span>
       </button>
       <button 
         className={`bottom-nav-item ${view === 'profile' ? 'active' : ''}`} 
@@ -700,9 +666,11 @@ const App: React.FC = () => {
       {featured ? (
         <>
           <div className="product-image">
-            <span style={{ fontSize: '4rem', position: 'relative', zIndex: 1 }} className="float">
-              {product.image}
-            </span>
+            <img 
+              src={product.image} 
+              alt={product.title}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
+            />
           </div>
           <div className="product-content">
             <div className="product-badge">
@@ -711,9 +679,9 @@ const App: React.FC = () => {
             </div>
             <h2 className="product-title">{product.title}</h2>
             <div className="product-curator">
-              <div className="curator-avatar">V</div>
+              <div className="curator-avatar">{product.influencer.slice(2, 4).toUpperCase()}</div>
               <span className="curator-label">
-                Curated by <span className="curator-address">{shortenAddress(product.influencer)}</span>
+                by <span className="curator-address">{shortenAddress(product.influencer)}</span>
               </span>
             </div>
             <div className="product-meta">
@@ -732,7 +700,13 @@ const App: React.FC = () => {
         </>
       ) : (
         <div className="product-row">
-          <div className="product-row-image">{product.image}</div>
+          <div className="product-row-image">
+            <img 
+              src={product.image} 
+              alt={product.title}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }}
+            />
+          </div>
           <div className="product-row-content">
             <div className="product-row-badge">{product.badge}</div>
             <h3 className="product-row-title">{product.title}</h3>
@@ -754,92 +728,29 @@ const App: React.FC = () => {
     <div className="view-container stagger-children">
       {renderHeader()}
       
-      {/* Hero Stats */}
+      {/* Earnings Banner */}
       {walletAddress && (
         <div className="stats-banner fade-in-up">
           <div className="stat-box">
-            <span className="stat-value text-gradient">{USER_STATS.totalEarnings}</span>
+            <span className="stat-value">{USER_STATS.totalEarnings}</span>
             <span className="stat-label">ETH Earned</span>
           </div>
           <div className="stat-divider" />
           <div className="stat-box">
-            <span className="stat-value">{USER_STATS.auraScore}</span>
-            <span className="stat-label">Aura Score</span>
-          </div>
-          <div className="stat-divider" />
-          <div className="stat-box">
-            <span className="stat-value">#{USER_STATS.rank}</span>
-            <span className="stat-label">Global Rank</span>
+            <span className="stat-value">{USER_STATS.totalSales}</span>
+            <span className="stat-label">Sales</span>
           </div>
         </div>
       )}
 
-      {/* Category Tabs - Navigate to dedicated pages */}
-      <div className="nav-pills">
-        <button 
-          className={`nav-pill ${activeTab === 'featured' ? 'active' : ''}`}
-          onClick={() => { setActiveTab('featured'); navigateTo('featured'); }}
-        >
-          <Icons.Star />
-          Featured
-        </button>
-        <button 
-          className={`nav-pill ${activeTab === 'trending' ? 'active' : ''}`}
-          onClick={() => { setActiveTab('trending'); navigateTo('trending'); }}
-        >
-          <Icons.Flame />
-          Trending
-        </button>
-        <button 
-          className={`nav-pill ${activeTab === 'new' ? 'active' : ''}`}
-          onClick={() => { setActiveTab('new'); navigateTo('new'); }}
-        >
-          <Icons.Rocket />
-          New
-        </button>
-      </div>
-
-      {/* Featured Product */}
-      <div className="section-header">
-        <span className="section-title">🔥 Featured Drop</span>
-      </div>
+      {/* Products */}
       {renderProductCard(PRODUCTS[0], true)}
 
-      {/* More Products */}
-      <div className="section-header" style={{ marginTop: 'var(--spacing-xl)' }}>
-        <span className="section-title">More Vibes</span>
-        <button className="btn-ghost btn-sm" onClick={() => navigateTo('featured')}>View All</button>
+      <div className="section-header" style={{ marginTop: 'var(--spacing-lg)' }}>
+        <span className="section-title">Browse</span>
       </div>
       <div className="product-list">
-        {PRODUCTS.slice(1).map(product => renderProductCard(product))}
-      </div>
-
-      {/* Quick Actions */}
-      <div className="quick-actions">
-        <button className="action-card" onClick={() => navigateTo('leaderboard')}>
-          <div className="action-icon">🏆</div>
-          <div className="action-content">
-            <h4>Leaderboard</h4>
-            <p>See top curators</p>
-          </div>
-          <Icons.ChevronRight />
-        </button>
-        <button className="action-card" onClick={() => navigateTo('transactions')}>
-          <div className="action-icon">📊</div>
-          <div className="action-content">
-            <h4>Transactions</h4>
-            <p>View on BaseScan</p>
-          </div>
-          <Icons.ChevronRight />
-        </button>
-        <button className="action-card" onClick={() => navigateTo('profile')}>
-          <div className="action-icon">💰</div>
-          <div className="action-content">
-            <h4>Your Earnings</h4>
-            <p>Track your revenue</p>
-          </div>
-          <Icons.ChevronRight />
-        </button>
+        {PRODUCTS.slice(1, 8).map(product => renderProductCard(product))}
       </div>
 
       {renderBottomNav()}
@@ -852,9 +763,11 @@ const App: React.FC = () => {
 
       <div className="product-detail-card">
         <div className="product-image large">
-          <span style={{ fontSize: '5rem', position: 'relative', zIndex: 1 }} className="float">
-            {selectedProduct.image}
-          </span>
+          <img 
+            src={selectedProduct.image} 
+            alt={selectedProduct.title}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
+          />
         </div>
         <div className="product-content">
           <div className="product-badge">
@@ -865,9 +778,9 @@ const App: React.FC = () => {
           <p className="product-description">{selectedProduct.description}</p>
           
           <div className="product-curator">
-            <div className="curator-avatar">V</div>
+            <div className="curator-avatar">{selectedProduct.influencer.slice(2, 4).toUpperCase()}</div>
             <span className="curator-label">
-              Curated by <span className="curator-address">{shortenAddress(selectedProduct.influencer)}</span>
+              by <span className="curator-address">{shortenAddress(selectedProduct.influencer)}</span>
             </span>
           </div>
           
@@ -882,30 +795,9 @@ const App: React.FC = () => {
               </div>
             </div>
             <div className="detail-item">
-              <span className="detail-label">Your Earnings</span>
-              <span className="detail-value accent">7% per sale</span>
+              <span className="detail-label">Referral</span>
+              <span className="detail-value accent">7%</span>
             </div>
-            <div className="detail-item">
-              <span className="detail-label">Total Sales</span>
-              <span className="detail-value">{formatNumber(selectedProduct.sales)}</span>
-            </div>
-            <div className="detail-item">
-              <span className="detail-label">Curator Earnings</span>
-              <span className="detail-value">{selectedProduct.earnings} ETH</span>
-            </div>
-          </div>
-
-          <div className="divider" />
-
-          {/* Benefits Section */}
-          <div className="benefits-section">
-            <h4 className="benefits-title">What you get</h4>
-            <ul className="benefits-list">
-              <li><span className="benefit-icon">✓</span> Exclusive NFT ownership</li>
-              <li><span className="benefit-icon">✓</span> 7% on every referral sale</li>
-              <li><span className="benefit-icon">✓</span> Access to holders-only channel</li>
-              <li><span className="benefit-icon">✓</span> Early access to future drops</li>
-            </ul>
           </div>
         </div>
       </div>
@@ -913,11 +805,8 @@ const App: React.FC = () => {
       {/* Bottom Action Bar */}
       <div className="bottom-bar">
         <div className="bottom-bar-content">
-          <button className="btn btn-secondary btn-lg" style={{ flex: '0 0 auto' }}>
-            <Icons.Share />
-          </button>
           <button
-            className="btn btn-primary btn-lg btn-block btn-ripple"
+            className="btn btn-primary btn-lg btn-block"
             onClick={handleBuy}
             disabled={buying}
           >
@@ -944,17 +833,21 @@ const App: React.FC = () => {
         <div className="success-icon success-pop">
           <Icons.Check />
         </div>
-        <h1 className="success-title">Vibe Confirmed! 🚀</h1>
+        <h1 className="success-title">Purchase complete</h1>
         <p className="success-subtitle">
           You now own <strong>{selectedProduct.title}</strong>
         </p>
 
         <div className="success-card">
           <div className="success-nft">
-            <span style={{ fontSize: '3rem' }}>{selectedProduct.image}</span>
+            <img 
+              src={selectedProduct.image} 
+              alt={selectedProduct.title}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }}
+            />
           </div>
           <div className="success-details">
-            <p className="success-detail-label">Transaction Complete</p>
+            <p className="success-detail-label">Amount paid</p>
             <p className="success-detail-value">-{selectedProduct.priceEth} ETH</p>
           </div>
         </div>
@@ -971,20 +864,15 @@ const App: React.FC = () => {
           </button>
         )}
 
-        <div className="aura-badge">
-          <span className="aura-label">Aura Score</span>
-          <span className="aura-value">+100 ✨</span>
-        </div>
-
         {/* Referral Link */}
         <div className="referral-section">
-          <h4>Share & Earn 7%</h4>
+          <h4>Share your link</h4>
           <p className="referral-description">
-            Earn 7% on every sale when someone buys using your link
+            Earn 7% when someone buys through your link
           </p>
           <div className="referral-link-box">
             <code className="referral-link">
-              {`vibecheck.xyz/vibe/${shortenAddress(walletAddress || '0x0000...0000')}`}
+              {`vibecheck.xyz/${shortenAddress(walletAddress || '0x0000')}`}
             </code>
             <button 
               className="btn-icon" 
@@ -995,33 +883,11 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {/* Share Buttons */}
-        <div className="share-buttons">
-          <a
-            href={`https://warpcast.com/~/compose?text=I%20just%20got%20${encodeURIComponent(selectedProduct.title)}%20on%20VibeCheck!%20🕶️&embeds[]=${location.origin}/vibe/${walletAddress}`}
-            target="_blank"
-            rel="noreferrer"
-            className="share-btn warpcast"
-          >
-            <span className="share-icon">🟣</span>
-            Share on Warpcast
-          </a>
-          <a
-            href={`https://twitter.com/intent/tweet?text=I%20just%20got%20${encodeURIComponent(selectedProduct.title)}%20on%20VibeCheck!%20🕶️&url=${location.origin}/vibe/${walletAddress}`}
-            target="_blank"
-            rel="noreferrer"
-            className="share-btn twitter"
-          >
-            <span className="share-icon">𝕏</span>
-            Share on X
-          </a>
-        </div>
-
         <button 
-          className="btn btn-ghost btn-block mt-lg" 
+          className="btn btn-primary btn-block mt-lg" 
           onClick={() => navigateTo('home')}
         >
-          Back to Home
+          Done
         </button>
       </div>
     </div>
@@ -1032,39 +898,13 @@ const App: React.FC = () => {
       {renderHeader(false)}
       
       <div className="page-header">
-        <h1 className="page-title">
-          <Icons.Trophy />
-          Leaderboard
-        </h1>
-        <p className="page-subtitle">Top curators this week</p>
+        <h1 className="page-title">Leaderboard</h1>
+        <p className="page-subtitle">Top sellers this week</p>
       </div>
 
-      {/* Top 3 Podium */}
-      <div className="podium">
-        <div className="podium-item second">
-          <div className="podium-avatar">{LEADERBOARD[1].avatar}</div>
-          <span className="podium-rank">2</span>
-          <span className="podium-name">{LEADERBOARD[1].username}</span>
-          <span className="podium-earnings">{LEADERBOARD[1].earnings} ETH</span>
-        </div>
-        <div className="podium-item first">
-          <div className="podium-crown">👑</div>
-          <div className="podium-avatar gold">{LEADERBOARD[0].avatar}</div>
-          <span className="podium-rank">1</span>
-          <span className="podium-name">{LEADERBOARD[0].username}</span>
-          <span className="podium-earnings">{LEADERBOARD[0].earnings} ETH</span>
-        </div>
-        <div className="podium-item third">
-          <div className="podium-avatar">{LEADERBOARD[2].avatar}</div>
-          <span className="podium-rank">3</span>
-          <span className="podium-name">{LEADERBOARD[2].username}</span>
-          <span className="podium-earnings">{LEADERBOARD[2].earnings} ETH</span>
-        </div>
-      </div>
-
-      {/* Rest of Leaderboard */}
+      {/* Leaderboard List */}
       <div className="leaderboard-list">
-        {LEADERBOARD.slice(3).map((entry) => (
+        {LEADERBOARD.map((entry) => (
           <div key={entry.rank} className="leaderboard-item">
             <span className="leaderboard-rank">#{entry.rank}</span>
             <div className="leaderboard-avatar">{entry.avatar}</div>
@@ -1075,54 +915,6 @@ const App: React.FC = () => {
             <div className="leaderboard-earnings">
               <span className="earnings-value">{entry.earnings}</span>
               <span className="earnings-label">ETH</span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Your Position */}
-      {walletAddress && (
-        <div className="your-rank-card">
-          <span className="your-rank-label">Your Position</span>
-          <div className="your-rank-content">
-            <span className="your-rank-number">#{USER_STATS.rank}</span>
-            <div className="your-rank-stats">
-              <span>{formatNumber(USER_STATS.totalSales)} sales</span>
-              <span className="accent">{USER_STATS.totalEarnings} ETH</span>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {renderBottomNav()}
-    </div>
-  );
-
-  const renderActivity = () => (
-    <div className="view-container stagger-children">
-      {renderHeader(false)}
-      
-      <div className="page-header">
-        <h1 className="page-title">
-          <Icons.Activity />
-          Activity
-        </h1>
-        <p className="page-subtitle">Your recent transactions</p>
-      </div>
-
-      <div className="activity-list">
-        {ACTIVITIES.map((activity) => (
-          <div key={activity.id} className={`activity-item ${activity.type}`}>
-            <div className="activity-icon">{activity.icon}</div>
-            <div className="activity-content">
-              <span className="activity-title">{activity.title}</span>
-              <span className="activity-description">{activity.description}</span>
-            </div>
-            <div className="activity-meta">
-              <span className={`activity-amount ${activity.amount.startsWith('+') ? 'positive' : 'negative'}`}>
-                {activity.amount}
-              </span>
-              <span className="activity-time">{activity.timestamp}</span>
             </div>
           </div>
         ))}
@@ -1139,38 +931,24 @@ const App: React.FC = () => {
       {/* Profile Header */}
       <div className="profile-header">
         <div className="profile-avatar-large">
-          {walletAddress ? '🕶️' : '👤'}
+          {walletAddress ? walletAddress.slice(2, 4).toUpperCase() : '?'}
         </div>
         <h2 className="profile-name">
           {walletAddress ? shortenAddress(walletAddress) : 'Not Connected'}
         </h2>
-        {walletAddress && (
-          <div className="profile-badges">
-            <span className="profile-badge">Early Adopter</span>
-            <span className="profile-badge accent">Top 15%</span>
-          </div>
-        )}
       </div>
 
-      {/* Stats Grid */}
+      {/* Simple Stats */}
       <div className="profile-stats-grid">
         <div className="profile-stat-card">
-          <Icons.Wallet />
-          <span className="profile-stat-value text-gradient">{USER_STATS.totalEarnings} ETH</span>
-          <span className="profile-stat-label">Total Earnings</span>
+          <span className="profile-stat-value">{USER_STATS.totalEarnings} ETH</span>
+          <span className="profile-stat-label">Earned</span>
         </div>
         <div className="profile-stat-card">
-          <Icons.Trophy />
-          <span className="profile-stat-value">#{USER_STATS.rank}</span>
-          <span className="profile-stat-label">Global Rank</span>
+          <span className="profile-stat-value">{USER_STATS.totalSales}</span>
+          <span className="profile-stat-label">Sales</span>
         </div>
         <div className="profile-stat-card">
-          <Icons.Sparkles />
-          <span className="profile-stat-value">{formatNumber(USER_STATS.auraScore)}</span>
-          <span className="profile-stat-label">Aura Score</span>
-        </div>
-        <div className="profile-stat-card">
-          <Icons.Gift />
           <span className="profile-stat-value">{USER_STATS.referrals}</span>
           <span className="profile-stat-label">Referrals</span>
         </div>
@@ -1178,13 +956,18 @@ const App: React.FC = () => {
 
       {/* NFTs Owned */}
       <div className="section-header">
-        <span className="section-title">Your Collection</span>
+        <span className="section-title">Owned</span>
         <span className="section-count">{USER_STATS.nftsOwned} items</span>
       </div>
       <div className="nft-grid">
-        {PRODUCTS.slice(0, 4).map((product) => (
+        {PRODUCTS.slice(0, USER_STATS.nftsOwned).map((product) => (
           <div key={product.id} className="nft-item">
-            <span className="nft-image">{product.image}</span>
+            <img 
+              src={product.image} 
+              alt={product.title}
+              className="nft-image"
+              style={{ width: '100%', height: '48px', objectFit: 'cover', borderRadius: '6px' }}
+            />
             <span className="nft-name">{product.title.split(' ')[0]}</span>
           </div>
         ))}
@@ -1216,230 +999,16 @@ const App: React.FC = () => {
     </div>
   );
 
-  // ================== Featured Page ==================
-  const renderFeatured = () => {
-    const featuredProducts = getFeaturedProducts();
-    return (
-      <div className="view-container stagger-children">
-        {renderHeader(true, 'Featured')}
-        
-        <div className="page-hero featured-hero">
-          <div className="hero-icon">⭐</div>
-          <h1 className="hero-title">Featured Drops</h1>
-          <p className="hero-subtitle">Hand-picked by our curators. Premium quality guaranteed.</p>
-        </div>
-
-        <div className="stats-row">
-          <div className="mini-stat">
-            <span className="mini-stat-value">{featuredProducts.length}</span>
-            <span className="mini-stat-label">Products</span>
-          </div>
-          <div className="mini-stat">
-            <span className="mini-stat-value">{featuredProducts.reduce((acc, p) => acc + p.sales, 0).toLocaleString()}</span>
-            <span className="mini-stat-label">Total Sales</span>
-          </div>
-          <div className="mini-stat">
-            <span className="mini-stat-value">{featuredProducts.reduce((acc, p) => acc + parseFloat(p.earnings), 0).toFixed(2)}</span>
-            <span className="mini-stat-label">ETH Volume</span>
-          </div>
-        </div>
-
-        <div className="section-header">
-          <span className="section-title">All Featured</span>
-          <span className="section-count">{featuredProducts.length} items</span>
-        </div>
-
-        {/* Featured Hero Card */}
-        {featuredProducts[0] && renderProductCard(featuredProducts[0], true)}
-
-        {/* Rest of featured products */}
-        <div className="product-list">
-          {featuredProducts.slice(1).map(product => renderProductCard(product))}
-        </div>
-
-        {renderBottomNav()}
-      </div>
-    );
-  };
-
-  // ================== Trending Page ==================
-  const renderTrending = () => {
-    const trendingProducts = getTrendingProducts();
-    return (
-      <div className="view-container stagger-children">
-        {renderHeader(true, 'Trending')}
-        
-        <div className="page-hero trending-hero">
-          <div className="hero-icon">🔥</div>
-          <h1 className="hero-title">Trending Now</h1>
-          <p className="hero-subtitle">What the community is buying. Updated every hour.</p>
-        </div>
-
-        <div className="stats-row">
-          <div className="mini-stat hot">
-            <span className="mini-stat-value">+{Math.floor(Math.random() * 50 + 20)}%</span>
-            <span className="mini-stat-label">24h Volume</span>
-          </div>
-          <div className="mini-stat">
-            <span className="mini-stat-value">{trendingProducts.reduce((acc, p) => acc + p.sales, 0).toLocaleString()}</span>
-            <span className="mini-stat-label">Sales Today</span>
-          </div>
-          <div className="mini-stat">
-            <span className="mini-stat-value">{trendingProducts.length}</span>
-            <span className="mini-stat-label">Hot Items</span>
-          </div>
-        </div>
-
-        <div className="section-header">
-          <span className="section-title">🔥 Hot Right Now</span>
-        </div>
-
-        {/* Trending list with rank badges */}
-        <div className="trending-list">
-          {trendingProducts.map((product, index) => (
-            <div 
-              key={product.id} 
-              className="trending-item hover-lift"
-              onClick={() => selectProduct(product)}
-            >
-              <div className={`trending-rank rank-${index + 1}`}>
-                {index + 1}
-              </div>
-              <div className="trending-image">{product.image}</div>
-              <div className="trending-content">
-                <h3 className="trending-title">{product.title}</h3>
-                <p className="trending-category">{product.category}</p>
-                <div className="trending-stats">
-                  <span className="trending-sales">
-                    <Icons.TrendingUp />
-                    {formatNumber(product.sales)} sales
-                  </span>
-                </div>
-              </div>
-              <div className="trending-price">
-                <span className="price-amount">{product.priceEth}</span>
-                <span className="price-currency">ETH</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {renderBottomNav()}
-      </div>
-    );
-  };
-
-  // ================== New Drops Page ==================
-  const renderNew = () => {
-    const newProducts = getNewProducts();
-    return (
-      <div className="view-container stagger-children">
-        {renderHeader(true, 'New Drops')}
-        
-        <div className="page-hero new-hero">
-          <div className="hero-icon">🚀</div>
-          <h1 className="hero-title">New Drops</h1>
-          <p className="hero-subtitle">Fresh releases. Be the first to collect.</p>
-        </div>
-
-        <div className="stats-row">
-          <div className="mini-stat new">
-            <span className="mini-stat-value">{newProducts.length}</span>
-            <span className="mini-stat-label">This Week</span>
-          </div>
-          <div className="mini-stat">
-            <span className="mini-stat-value">24h</span>
-            <span className="mini-stat-label">Avg Drop Time</span>
-          </div>
-          <div className="mini-stat">
-            <span className="mini-stat-value">7%</span>
-            <span className="mini-stat-label">Curator Fee</span>
-          </div>
-        </div>
-
-        <div className="section-header">
-          <span className="section-title">🆕 Just Dropped</span>
-        </div>
-
-        {/* New products with launch dates */}
-        <div className="new-drops-list">
-          {newProducts.map((product) => (
-            <div 
-              key={product.id} 
-              className="new-drop-card hover-lift"
-              onClick={() => selectProduct(product)}
-            >
-              <div className="new-drop-header">
-                <div className="new-badge">
-                  <Icons.Clock />
-                  {product.launchDate && formatDate(product.launchDate + 'T00:00:00Z')}
-                </div>
-                <div className="new-drop-badge">{product.badge}</div>
-              </div>
-              <div className="new-drop-image">{product.image}</div>
-              <div className="new-drop-content">
-                <h3 className="new-drop-title">{product.title}</h3>
-                <p className="new-drop-desc">{product.description.slice(0, 80)}...</p>
-                <div className="new-drop-footer">
-                  <div className="new-drop-price">
-                    <span className="price-amount">{product.priceEth}</span>
-                    <span className="price-currency">ETH</span>
-                  </div>
-                  <div className="new-drop-sales">
-                    {formatNumber(product.sales)} minted
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {renderBottomNav()}
-      </div>
-    );
-  };
-
-  // ================== Transactions Page (BaseScan) ==================
+  // ================== Transactions Page ==================
   const renderTransactions = () => {
     const filteredTx = getFilteredTransactions();
-    const totalVolume = TRANSACTIONS.filter(tx => tx.type === 'buy').reduce((acc, tx) => acc + parseFloat(tx.amount), 0);
-    const totalEarned = TRANSACTIONS.filter(tx => tx.type === 'referral').reduce((acc, tx) => acc + parseFloat(tx.amount), 0);
     
     return (
       <div className="view-container stagger-children">
-        {renderHeader(true, 'Transactions')}
+        {renderHeader(false)}
         
-        <div className="page-hero tx-hero">
-          <div className="hero-icon">📊</div>
-          <h1 className="hero-title">Transaction History</h1>
-          <p className="hero-subtitle">All your on-chain activity on Base</p>
-        </div>
-
-        {/* Contract Info Card */}
-        <div className="contract-card">
-          <div className="contract-header">
-            <Icons.Box />
-            <span>Smart Contract</span>
-          </div>
-          <div className="contract-address">
-            <code>{shortenAddress(CONTRACT_ADDRESS)}</code>
-            <button 
-              className="btn-icon btn-sm"
-              onClick={() => openBaseScan(CONTRACT_ADDRESS, 'address')}
-            >
-              <Icons.ExternalLink />
-            </button>
-          </div>
-          <div className="contract-stats">
-            <div className="contract-stat">
-              <span className="contract-stat-value">{totalVolume.toFixed(3)}</span>
-              <span className="contract-stat-label">ETH Spent</span>
-            </div>
-            <div className="contract-stat">
-              <span className="contract-stat-value text-gradient">+{totalEarned.toFixed(4)}</span>
-              <span className="contract-stat-label">ETH Earned</span>
-            </div>
-          </div>
+        <div className="page-header">
+          <h1 className="page-title">History</h1>
         </div>
 
         {/* Filter Pills */}
@@ -1462,12 +1031,6 @@ const App: React.FC = () => {
           >
             Referrals
           </button>
-          <button 
-            className={`tx-filter ${txFilter === 'mint' ? 'active' : ''}`}
-            onClick={() => setTxFilter('mint')}
-          >
-            Mints
-          </button>
         </div>
 
         {/* Transaction List */}
@@ -1479,33 +1042,20 @@ const App: React.FC = () => {
               onClick={() => openBaseScan(tx.hash)}
             >
               <div className={`tx-type-icon ${tx.type}`}>
-                {tx.type === 'buy' && '🛒'}
-                {tx.type === 'referral' && '🔗'}
-                {tx.type === 'mint' && '✨'}
+                {tx.type === 'buy' && '↓'}
+                {tx.type === 'referral' && '←'}
+                {tx.type === 'mint' && '◆'}
               </div>
               <div className="tx-content">
                 <div className="tx-header">
                   <span className="tx-title">
                     {tx.type === 'buy' && 'Purchase'}
-                    {tx.type === 'referral' && 'Referral Reward'}
-                    {tx.type === 'mint' && 'NFT Minted'}
-                  </span>
-                  <span className={`tx-status ${tx.status}`}>
-                    {tx.status === 'confirmed' && '✓'}
-                    {tx.status === 'pending' && '⏳'}
-                    {tx.status === 'failed' && '✗'}
+                    {tx.type === 'referral' && 'Referral'}
+                    {tx.type === 'mint' && 'Mint'}
                   </span>
                 </div>
                 <div className="tx-hash">
                   <code>{shortenHash(tx.hash)}</code>
-                  <Icons.ExternalLink />
-                </div>
-                <div className="tx-meta">
-                  <span className="tx-time">
-                    <Icons.Clock />
-                    {formatDate(tx.timestamp)}
-                  </span>
-                  <span className="tx-block">Block #{tx.blockNumber.toLocaleString()}</span>
                 </div>
               </div>
               <div className="tx-amount-col">
@@ -1514,20 +1064,10 @@ const App: React.FC = () => {
                   {tx.type === 'referral' && '+'}
                   {tx.amount} ETH
                 </span>
-                <span className="tx-gas">Gas: {tx.gasUsed} ETH</span>
               </div>
             </div>
           ))}
         </div>
-
-        {/* View All on BaseScan */}
-        <button 
-          className="btn btn-secondary btn-block mt-lg"
-          onClick={() => walletAddress && openBaseScan(walletAddress, 'address')}
-        >
-          <Icons.ExternalLink />
-          View All on BaseScan
-        </button>
 
         {renderBottomNav()}
       </div>
@@ -1541,11 +1081,7 @@ const App: React.FC = () => {
       {view === 'vibe' && renderVibe()}
       {view === 'success' && renderSuccess()}
       {view === 'leaderboard' && renderLeaderboard()}
-      {view === 'activity' && renderActivity()}
       {view === 'profile' && renderProfile()}
-      {view === 'featured' && renderFeatured()}
-      {view === 'trending' && renderTrending()}
-      {view === 'new' && renderNew()}
       {view === 'transactions' && renderTransactions()}
     </div>
   );
